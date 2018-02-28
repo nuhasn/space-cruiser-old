@@ -4,45 +4,33 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public int startVelocity;
     public float movementStrength;
-    public float acceleration;
-    public int maximumVelocity;
+    public GameObject camera;
+    public int maxX;
+    public int maxY;
 
     //Current score
     private int score;
-    //The acceleration to be applied to the falling player.
-    private float acc;
-    //The current velocity of the player falling downwards.
-    private float velocity;
     private Rigidbody2D rb;
 
     // Use this for initialization
     void Start()
     {
-        this.acc = acceleration / 1000;
-        this.velocity = this.startVelocity;
-        this.rb = gameObject.GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(velocity, 0);
         this.score = 0;
-
+        this.rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (velocity < maximumVelocity)
-            velocity = velocity + acc;
-
-        rb.velocity = new Vector2(velocity, rb.velocity.y);
         float x = 0;
-        if (Input.GetKey("up"))
+        if (Input.GetKey("up") && rb.transform.position.y < camera.transform.position.y + maxY)
             transform.position = new Vector2(this.transform.position.x, this.transform.position.y + movementStrength / 100);
-        else if (Input.GetKey("down"))
+        else if (Input.GetKey("down") && rb.transform.position.y > camera.transform.position.y - maxY)
             transform.position = new Vector2(this.transform.position.x, this.transform.position.y - movementStrength / 100);
-        else if (Input.GetKey("left"))
+        else if (Input.GetKey("left") && rb.transform.position.x > camera.transform.position.x - maxX)
             transform.position = new Vector2(this.transform.position.x - movementStrength / 100, this.transform.position.y);
-        else if (Input.GetKey("right"))
+        else if (Input.GetKey("right") && rb.transform.position.x < camera.transform.position.x + maxX)
             transform.position = new Vector2(this.transform.position.x + movementStrength / 100, this.transform.position.y);
     }
 
