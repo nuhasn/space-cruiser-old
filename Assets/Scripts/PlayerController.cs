@@ -11,9 +11,9 @@ public class PlayerController : MonoBehaviour
 
     //Current score
     private int score;
-    //The acceleration to be applied to the player.
+    //The acceleration to be applied to the falling player.
     private float acc;
-    //The current velocity of the player going to the right.
+    //The current velocity of the player falling downwards.
     private float velocity;
     private Rigidbody2D rb;
 
@@ -23,8 +23,7 @@ public class PlayerController : MonoBehaviour
         this.acc = acceleration / 1000;
         this.velocity = this.startVelocity;
         this.rb = gameObject.GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(velocity,0);
-        rb.gravityScale = 0;
+        rb.velocity = new Vector2(velocity, 0);
         this.score = 0;
 
     }
@@ -32,14 +31,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (velocity < maximumVelocity)
+            velocity = velocity + acc;
+
+        rb.velocity = new Vector2(velocity, rb.velocity.y);
         float x = 0;
         if (Input.GetKey("up"))
-            x = - movementStrength;
+            transform.position = new Vector2(this.transform.position.x, this.transform.position.y + movementStrength / 100);
         else if (Input.GetKey("down"))
-            x = movementStrength;
-
-        rb.AddForce(new Vector2(0, x));
-        //rb.velocity = new Vector2(x, rb.velocity.y);
+            transform.position = new Vector2(this.transform.position.x, this.transform.position.y - movementStrength / 100);
+        else if (Input.GetKey("left"))
+            transform.position = new Vector2(this.transform.position.x - movementStrength / 100, this.transform.position.y);
+        else if (Input.GetKey("right"))
+            transform.position = new Vector2(this.transform.position.x + movementStrength / 100, this.transform.position.y);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

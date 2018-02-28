@@ -185,17 +185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f93a9605cdfeec47a5cefd08e50009e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deletionPoint: {fileID: 2067270397}
-  objectsToPool:
-  - {fileID: 1078458213929030, guid: a76f607ea8f67f340b366b1cbb962226, type: 2}
-  - {fileID: 1173624118972390, guid: 6c3304571c0b3734d9c1fd634965de06, type: 2}
-  - {fileID: 1286993991068968, guid: 0c148e2adf2010f4dac55afcd848c337, type: 2}
-  noOfObjectsToPool: 2
-  coinPatternsToPool:
-  - {fileID: 1663446755954806, guid: 8f448e8bb61acd84b84635f025be6bac, type: 2}
-  - {fileID: 1703656204674666, guid: 2f3fd2106485df34b8a8a54ed3cb9a73, type: 2}
-  - {fileID: 1675484970966266, guid: b4c2e3285ef1f3e40b7ffa516240f7f4, type: 2}
-  noOfCoinPatternsToPool: 1
 --- !u!1 &289519129
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,9 +212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b0ba99929173e4cbacd9c4b155c2ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstWall: {fileID: 0}
-  blockGenerationPoint: {fileID: 1139996901}
-  previousBlockHeight: 0
 --- !u!4 &289519131
 Transform:
   m_ObjectHideFlags: 0
@@ -314,7 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startVelocity: 4
-  movementStrength: 10
+  movementStrength: 20
   acceleration: 2
   maximumVelocity: 9
 --- !u!50 &450203613
@@ -325,7 +311,7 @@ Rigidbody2D:
     type: 2}
   m_PrefabInternal: {fileID: 940133338}
   m_GameObject: {fileID: 450203611}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
@@ -660,8 +646,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9c84a128acc2c4b834857abaa06b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfDestructPoint: {fileID: 2067270397}
-  blockHeight: 0
 --- !u!4 &910344291
 Transform:
   m_ObjectHideFlags: 0
@@ -738,7 +722,12 @@ Prefab:
     - target: {fileID: 114487588727155850, guid: ff4afc777d8cf494e949105765b8656e,
         type: 2}
       propertyPath: movementStrength
-      value: 10
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 50408415286797216, guid: ff4afc777d8cf494e949105765b8656e,
+        type: 2}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
